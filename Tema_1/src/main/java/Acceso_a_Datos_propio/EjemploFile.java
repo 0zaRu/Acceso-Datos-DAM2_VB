@@ -1,4 +1,4 @@
-package Acceso_a_Datos_popio;
+package Acceso_a_Datos_propio;
 
 import java.io.File;
 

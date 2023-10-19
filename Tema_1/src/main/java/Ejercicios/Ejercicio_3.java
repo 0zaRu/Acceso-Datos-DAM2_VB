@@ -23,7 +23,7 @@ public class Ejercicio_3 {
             switch(opcion){
                 case 1:
                     System.out.print("\nIntroduce una ruta: ");
-                    ruta = kb.nextLine();
+                    ruta = kb.next();
                     
                     if(!mostrarDirectorio(ruta))
                         System.out.println("\nEl directorio introducido o el nombre probablemente sea erroneo, pulse enter ...");
@@ -31,10 +31,10 @@ public class Ejercicio_3 {
                     break;
                 case 2:
                     System.out.print("\nIntroduce una ruta donde quieres crearlo: ");
-                    ruta = kb.nextLine();
+                    ruta = kb.next();
                     
                     System.out.print("\nIntroduce el nombre de la carpeta: ");
-                    nombre = kb.nextLine();
+                    nombre = kb.next();
                     
                     if(!creaDirectorio(ruta, nombre))
                         System.out.println("\nEl directorio introducido o el nombre probablemente sea erroneo, pulse enter ...");
@@ -42,10 +42,10 @@ public class Ejercicio_3 {
                     break;
                 case 3:
                     System.out.print("\nIntroduce una ruta donde quieres crearlo: ");
-                    ruta = kb.nextLine();
+                    ruta = kb.next();
                     
                     System.out.print("\nIntroduce el nombre y extensión del archivo: ");
-                    nombre = kb.nextLine();
+                    nombre = kb.next();
                     
                     if(!creaFichero(ruta, nombre))
                         System.out.println("\nEl directorio introducido o el nombre probablemente sea erroneo, pulse enter ...");
@@ -53,10 +53,10 @@ public class Ejercicio_3 {
                     break;
                 case 4:
                     System.out.print("\nIntroduce una ruta de fichero que quieras renombrar: ");
-                    ruta = kb.nextLine();
+                    ruta = kb.next();
                     
                     System.out.print("\nIntroduce el nuevo nombre: ");
-                    nombre = kb.nextLine();
+                    nombre = kb.next();
                     
                     if(!renombraFichero(ruta, nombre))
                         System.out.println("\nEl directorio introducido o el nombre probablemente sea erroneo, pulse enter ...");
@@ -64,10 +64,10 @@ public class Ejercicio_3 {
                     break;
                 case 5:
                     System.out.print("\nIntroduce una ruta de fichero que quieras borrar: ");
-                    ruta = kb.nextLine();
+                    ruta = kb.next();
                     
                     if(!borraFichero(ruta))
-                        System.out.println("\nLa ruta introducida probablemente sea erroneo, pulse enter ...");
+                        System.out.println("\nLa ruta introducida probablemente sea erronea, pulse enter ...");
                     
                     break;
                 case 6:
@@ -77,7 +77,7 @@ public class Ejercicio_3 {
             }
             
             System.out.println("Pulse enter para continuar ...");
-            kb.nextLine();
+            kb.next();
             limpiar();
             
         }while(!salir);
@@ -108,13 +108,12 @@ public class Ejercicio_3 {
         if(!ruta.exists())
             return false;
         
-        
         File contenido[] = ruta.listFiles();
         for(File archivo : contenido){
             if(archivo.isDirectory())
-                System.out.println("Directorio - \t"+archivo);
+                System.out.println("Directorio\t - \t"+archivo.getName());
             else
-                System.out.println(archivo.length()+" - \t");
+                System.out.println(archivo.length()+"\t - \t"+archivo.getName());
         }
         
         return true;
@@ -168,8 +167,9 @@ public class Ejercicio_3 {
         if(!ruta.exists())
             return false;
         
-        ruta.delete();
-            
+        if(!ruta.delete())
+            return false;
+        
         return true;
     }
     

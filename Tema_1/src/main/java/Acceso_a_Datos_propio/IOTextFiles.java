@@ -1,4 +1,4 @@
-package com.mycompany.acceso_datos_propio;
+package Acceso_a_Datos_propio;
 
 import java.io.File;
 import java.io.FileWriter;

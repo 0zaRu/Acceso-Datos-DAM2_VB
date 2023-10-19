@@ -14,7 +14,6 @@ public class Ejercicio_5 {
     public static void main(String[] args){
         
         kb.useDelimiter(System.getProperty("line.separator"));
-        StringBuffer leido = new StringBuffer();
         
         File ruta = new File(System.getProperty("user.dir")+System.getProperty("file.separator")+"archivo");
         if(!ruta.exists())
