@@ -2,46 +2,52 @@ package Ejercicios;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 
-public class FlujosDeDatos {
-    static final String archivoDatos = "archivoDatos.bin";
+public class FlujosDeObjetos implements Serializable {
+    static final long serialVersionUID = 1;
+    static final String archivoObjetos = "archivoObjetos.bin";
     static File ruta = new File(System.getProperty("user.dir")+System.getProperty("file.separator")+"archivos"+System.getProperty("file.separator"));
 
-    double[] precios = {19.99, 9.99, 15.99, 3.99, 4.99};
+    BigDecimal[] precio_unitario = {
+        new BigDecimal("19.99"),
+        new BigDecimal("9.99"),
+        new BigDecimal("15.99"),
+        new BigDecimal("3.99"),
+        new BigDecimal("4.99")};
+         
     int[] numerosDeUnidades = {12, 8, 13, 29, 50};
     String[] descripciones = {"Acceso a datos", "Bases de datos", "Java", "Android Studio", "Programación móviles"};
 
-    public FlujosDeDatos(){
+    public FlujosDeObjetos(){
         if(!ruta.exists())
             ruta.mkdirs();
         
-            ruta = new File(ruta, archivoDatos);
+            ruta = new File(ruta, archivoObjetos);
     }
 
     boolean escribirDisco(){
 
-        DataOutputStream escritor = null;
+        FlujosDeObjetos esteFlujo = this;
+        ObjectOutputStream escritor = null;
         BufferedOutputStream bos = null;
 
         try{
             if(!ruta.exists())
                 ruta.createNewFile();
 
-            escritor = new DataOutputStream(bos = new BufferedOutputStream(new FileOutputStream(archivoDatos)));
+            escritor = new ObjectOutputStream(bos = new BufferedOutputStream(new FileOutputStream(archivoObjetos)));
 
-            for(int i = 0; i < this.precios.length; i++){
-                escritor.writeDouble(this.precios[i]);
-                escritor.writeInt(this.numerosDeUnidades[i]);
-                escritor.writeUTF(this.descripciones[i]);
-            }
+            escritor.writeObject(esteFlujo);
 
         }catch(Exception e){
+            e.printStackTrace();
             return false;
         
         }finally{
@@ -56,43 +62,21 @@ public class FlujosDeDatos {
         return true;
     }
 
-    boolean leerDisco(){
-        DataInputStream lector = null;
+    FlujosDeObjetos leerDisco(){
+
+        ObjectInputStream lector = null;
         BufferedInputStream bis = null;
 
         try{
             if(!ruta.exists()){
-                return false;
+                return null;
             }
 
-            lector = new DataInputStream(bis = new BufferedInputStream(new FileInputStream(archivoDatos)));
-            ArrayList<Double> precios = new ArrayList<>();
-            ArrayList<Integer> numerosDeUnidades = new ArrayList<>();
-            ArrayList<String> descripciones = new ArrayList<>();
-
-            try{
-                while(true){
-                    precios.add(lector.readDouble());
-                    numerosDeUnidades.add(lector.readInt());
-                    descripciones.add(lector.readUTF()); 
-                }
-            }catch(Exception e){
-
-            }
-
-            this.precios = new double[precios.size()];
-            this.numerosDeUnidades = new int[precios.size()];
-            this.descripciones = new String[precios.size()];
-
-            for(int i = 0; i < precios.size(); i++){
-                this.precios[i] = precios.get(i);
-                this.numerosDeUnidades[i] = numerosDeUnidades.get(i);
-                this.descripciones[i] = descripciones.get(i);
-            }
-
+            lector = new ObjectInputStream(bis = new BufferedInputStream(new FileInputStream(archivoObjetos)));
+            return (FlujosDeObjetos)lector.readObject();
 
         }catch(Exception e){
-            return false;
+            return null;
         
         }finally{
             try{
@@ -102,28 +86,27 @@ public class FlujosDeDatos {
                 
             }
         }
-
-        return true;
     }
 
-    boolean apendElemento(double precio, int nUnidades, String descripcion){
+    boolean apendElemento(String precio, int nUnidades, String descripcion){
         int i;
 
-        double[] precios = new double[this.precios.length+1];
+        BigDecimal[] precio_unitario = new BigDecimal[this.precio_unitario.length+1];
         int[] numerosDeUnidades = new int[this.numerosDeUnidades.length+1];
         String[] descripciones = new String[this.descripciones.length+1];
 
-        for(i = 0; i < this.precios.length; i++){
-            precios[i] = this.precios[i];
+        for(i = 0; i < this.precio_unitario.length; i++){
+            precio_unitario[i] = this.precio_unitario[i];
             numerosDeUnidades[i] = this.numerosDeUnidades[i];
             descripciones[i] = this.descripciones[i];
         }
-
-        precios[i] = precio;
+        precio = precio.replace(",", ".");
+        
+        precio_unitario[i] = new BigDecimal(precio);
         numerosDeUnidades[i] = nUnidades;
         descripciones[i] = descripcion;
 
-        this.precios = precios;
+        this.precio_unitario = precio_unitario;
         this.numerosDeUnidades = numerosDeUnidades;
         this.descripciones = descripciones;
 
@@ -148,8 +131,8 @@ public class FlujosDeDatos {
     public String toString(){
         String imprime = "";
 
-        for(int i = 0; i < precios.length; i++){
-            imprime += "Posicion "+ i + "->\tPrecio: "+ precios[i] + ". Unid: " + numerosDeUnidades[i] + ". Desc: " + descripciones[i] + ".\n";
+        for(int i = 0; i < precio_unitario.length; i++){
+            imprime += "Posicion "+ i + "->\tPrecio: "+ precio_unitario[i] + ". Unid: " + numerosDeUnidades[i] + ". Desc: " + descripciones[i] + ".\n";
         }
 
         return imprime;
