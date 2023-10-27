@@ -33,6 +33,10 @@ public class Ejercicio_10 {
             displayEmployee(2);
 
             System.out.println("\n\n");
+            addEmployee();
+
+            System.out.println("\n\n");
+            modifyEmployee(2);
             
 
         } catch (IOException e) {
@@ -213,5 +217,8 @@ public class Ejercicio_10 {
         file.writeChars(apellido);
         file.writeInt(dept);
         file.writeDouble(nuevoSalario);
+
+        file.close();
+        sc.close();
     }
 }
