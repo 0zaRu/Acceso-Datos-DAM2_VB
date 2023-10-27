@@ -1,4 +1,4 @@
-package dom;
+package teoria;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
-public class IODOM {
+public class DOM {
 
     static File fich = new File(System.getProperty("user.dir")+System.getProperty("file.separator")+"archivos"+System.getProperty("file.separator")+"DOM"+System.getProperty("file.separator"), "Empleados.xml");
     

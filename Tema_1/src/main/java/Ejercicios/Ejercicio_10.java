@@ -10,7 +10,7 @@ siguientes opciones:
         d. Modificar los datos de un empleado. Se muestran los actuales y se permiten 
             cambios, excepto en el identificador
  */
-package Ejercicios;
+package ejercicios;
 
 import java.io.File;
 import java.io.IOException;
