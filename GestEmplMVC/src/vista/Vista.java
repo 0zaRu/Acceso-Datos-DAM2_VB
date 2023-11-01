@@ -48,6 +48,20 @@ public class Vista {
         else
             System.err.println("Hubo un problema a la hora de la lectura");
     }
+    
+    public void leeSax(){
+        if(c.leeSax())
+            System.out.println("\nLeido correctamente del fichero por defecto\n");
+        else
+            System.err.println("Hubo un problema a la hora de la lectura");
+    }
+    
+    public void escribeSax(){
+        if(c.escribeSax())
+            System.out.println("\nEscrito correctamente en el fichero por defecto\n");
+        else
+            System.err.println("Hubo un problema a la hora de la escritura");
+    }
 
    
 } // fin class Vista

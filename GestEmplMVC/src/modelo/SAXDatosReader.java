@@ -1,8 +1,14 @@
-package teoria;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package modelo;
 
+import entidades.Alm_datos;
+import entidades.Empleado;
 import java.io.IOException;
-import java.net.ContentHandler;
-
+import java.util.List;
+import org.xml.sax.ContentHandler;
 import org.xml.sax.DTDHandler;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
@@ -11,11 +17,16 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.AttributesImpl;
 
-public class DatosReaderSAX implements XMLReader {
+/**
+ *
+ * @author arube
+ */
+public class SAXDatosReader implements XMLReader {
+
     private ContentHandler handler;
     private final AttributesImpl atts = new AttributesImpl();
+//métodos que serán usados por el transformer
 
-    // métodos que serán usados por el transformer
     @Override
     public void parse(InputSource input) throws IOException, SAXException {
         if (!(input instanceof Alm_datos)) {
@@ -29,8 +40,7 @@ public class DatosReaderSAX implements XMLReader {
         List<Empleado> empleados = source.getDatos();
         handler.startDocument();
         handler.startElement("", "empleados", "empleados", atts);
-        for (Empleado empl : empleados) {// El id, se añade como atributo para ver el uso de atributos, podría ser un
-                                         // elemento más
+        for (Empleado empl : empleados) {//El id, se añade como atributo para ver el uso de atributos, podría ser un elemento más
             atts.addAttribute("", "id", "id", "", String.valueOf(empl.getId()));
             handler.startElement("", "empleado", "empleado", atts);
             atts.clear();
@@ -41,9 +51,6 @@ public class DatosReaderSAX implements XMLReader {
         }
     }
 
-}
-
-    // Otros métodos que hay que implementar en DatosReader
     @Override
     public ContentHandler getContentHandler() {
         return handler;
@@ -101,11 +108,5 @@ public class DatosReaderSAX implements XMLReader {
     @Override
     public ErrorHandler getErrorHandler() {
         return null;
-    }
-
-    @Override
-    public void setContentHandler(org.xml.sax.ContentHandler handler) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setContentHandler'");
     }
 }

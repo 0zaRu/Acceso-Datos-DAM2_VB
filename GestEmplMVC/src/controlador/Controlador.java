@@ -29,4 +29,12 @@ public class Controlador {
     public boolean leeDom(){
         return m.leeDom();
     }
+    
+    public boolean leeSax(){
+        return m.leeSax();
+    }
+    
+    public boolean escribeSax(){
+        return m.escribeSax();
+    }
 }

@@ -53,11 +53,11 @@ public class GestEmplMVC {
                     break;
 
                 case "5": //Escribe en SAX
-                    
+                    v.escribeSax();
                     break;
 
                 case "6": //LEE SAX
-
+                    v.leeSax();
                     break;
                     
                 case "salir": case "q":
