@@ -31,6 +31,9 @@ public class GestEmplMVC {
                 + "4. Leer DOM\n"
                 + "5. Escribir SAX\n"
                 + "6. leer SAX\n"
+                + "7. serialización XStream\n"
+                + "8. deserialización XStream\n"
+                + "9. genera HTML con XSL\n"
                 + "q. Salir\n";
         String opcion;
         do {
@@ -58,6 +61,18 @@ public class GestEmplMVC {
 
                 case "6": //LEE SAX
                     v.leeSax();
+                    break;
+                   
+                case "7":
+                    v.serializaXStream();
+                    break;
+                    
+                case "8":
+                    v.deserializaXStream();
+                    break;
+                    
+                case "9":
+                    v.visualizaXSL();
                     break;
                     
                 case "salir": case "q":

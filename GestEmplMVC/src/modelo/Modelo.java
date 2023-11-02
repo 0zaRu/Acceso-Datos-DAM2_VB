@@ -1,12 +1,17 @@
 package modelo;
 
+import com.thoughtworks.xstream.XStream;
 import entidades.Alm_datos;
 import entidades.Empleado;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -16,11 +21,13 @@ import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -38,12 +45,15 @@ import org.xml.sax.XMLReader;
  */
 public class Modelo implements Serializable {
     
-    public static final File fich = new File(System.getProperty("user.dir")+System.getProperty("file.separator")+"archivos"+System.getProperty("file.separator"), "EmpleadosMVC.xml");    
+    public static final File fich = new File(System.getProperty("user.dir")+System.getProperty("file.separator")+"archivos"+System.getProperty("file.separator"), "EmpleadosMVC.xml"); 
+    public static final File fichXS = new File(System.getProperty("user.dir")+System.getProperty("file.separator")+"archivos"+System.getProperty("file.separator"), "EmpleadosXS.xml");
+    public static final File fichXSL = new File(System.getProperty("user.dir")+System.getProperty("file.separator")+"archivos"+System.getProperty("file.separator"), "EmpleadosXS.xsl");
     private ArrayList<Empleado> empleados;
     
     public Modelo() {
         empleados = new ArrayList<>();
-        compruebaFicheroStatico();
+        compruebaFichero(fich);
+        compruebaFichero(fichXS);
     }
 
     public ArrayList<String> mostrarEmpleados() {   
@@ -200,13 +210,12 @@ public class Modelo implements Serializable {
         try{
             
             XMLReader datosReader = new SAXDatosReader();
-            InputSource datosSource = new Alm_datos(50);
+            InputSource datosSource = new Alm_datos(empleados);
             Source source = new SAXSource(datosReader, datosSource);
             
             Result resultado = new StreamResult(fich);
             
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             
             transformer.transform(source, resultado);
@@ -217,14 +226,66 @@ public class Modelo implements Serializable {
         }
     }
     
+    public boolean serializaXStream(){
+        
+        XStream xstream= new XStream();
+        
+        try {
+            xstream.toXML(empleados, new FileOutputStream(fichXS));
+            
+            return true;
+        } catch (FileNotFoundException ex) {
+            return false;
+        }
+    }
     
-    private static void compruebaFicheroStatico() {
-        if(!fich.exists()){
-            if(!fich.getParentFile().exists())
-                fich.getParentFile().mkdirs();
+    public boolean deserializaXStream(){
+        
+        try{
+            XStream xstream= new XStream();
+
+            xstream.allowTypes(new String[]{"entidades.Empleado"});
+            ArrayList<Empleado> empTemp = (ArrayList<Empleado>) xstream.fromXML(fichXS);
+
+            empleados = empTemp;
+        
+        }catch(Exception e){
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean visualizaXSL() {
+        
+        File pagHTML = new File(fichXS.getParent(), "EmpleadosXS.html");
+        compruebaFichero(pagHTML);
+        
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(pagHTML);
+            Source estilos = new StreamSource(fichXSL);
+            Source datos = new StreamSource(fichXS);
+            
+            Result result = new StreamResult(fos);
+            Transformer transformer = TransformerFactory.newInstance().newTransformer(estilos);
+            transformer.transform(datos, result);
+            
+            fos.close();
+            return true;   
+            
+        } catch (IOException | TransformerException e){
+            System.err.println("Problema generando el html");
+            return false;
+        }
+    }
+    
+    private static void compruebaFichero(File f) {
+        if(!f.exists()){
+            if(!f.getParentFile().exists())
+                f.getParentFile().mkdirs();
             
             try {
-                fich.createNewFile();
+                f.createNewFile();
             } catch (IOException e) {
                 System.err.println("Problema creando fichero de XML.");
             }

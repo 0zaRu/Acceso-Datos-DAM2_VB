@@ -1,0 +1,9 @@
+<list>
+  <entidades.Empleado>
+    <id>0</id>
+    <nombre>Laura</nombre>
+    <apell1>Cano</apell1>
+    <apell2>Gil</apell2>
+    <salario>2000.0</salario>
+  </entidades.Empleado>
+</list>

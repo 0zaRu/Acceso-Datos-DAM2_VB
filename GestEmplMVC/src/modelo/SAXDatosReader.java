@@ -39,16 +39,40 @@ public class SAXDatosReader implements XMLReader {
         Alm_datos source = (Alm_datos) input;
         List<Empleado> empleados = source.getDatos();
         handler.startDocument();
-        handler.startElement("", "empleados", "empleados", atts);
-        for (Empleado empl : empleados) {//El id, se añade como atributo para ver el uso de atributos, podría ser un elemento más
-            atts.addAttribute("", "id", "id", "", String.valueOf(empl.getId()));
+        handler.startElement("", "Empleados", "Empleados", atts);
+        for (Empleado empl : empleados) {
             handler.startElement("", "empleado", "empleado", atts);
-            atts.clear();
+            
+            handler.startElement("", "id", "id", atts);
+            char[] id = Integer.toString(empl.getId()).toCharArray();
+            handler.characters(id, 0, id.length);
+            handler.endElement("", "id", "id");
+            
             handler.startElement("", "nombre", "nombre", atts);
             char[] nombre = empl.getNombre().toCharArray();
             handler.characters(nombre, 0, nombre.length);
             handler.endElement("", "nombre", "nombre");
+            
+            handler.startElement("", "apell1", "apell1", atts);
+            char[] apell1 = empl.getApell1().toCharArray();
+            handler.characters(apell1, 0, apell1.length);
+            handler.endElement("", "apell1", "apell1");
+            
+            handler.startElement("", "apell2", "apell2", atts);
+            char[] apell2 = empl.getApell2().toCharArray();
+            handler.characters(apell2, 0, apell2.length);
+            handler.endElement("", "apell2", "apell2");
+            
+            handler.startElement("", "salario", "salario", atts);
+            char[] salario = Float.toString(empl.getSalario()).toCharArray();
+            handler.characters(salario, 0, salario.length);
+            handler.endElement("", "salario", "salario");
+            
+            handler.endElement("", "empleado", "empleado");
         }
+        
+        handler.endElement("", "Empleados", "Empleados");
+        handler.endDocument();
     }
 
     @Override

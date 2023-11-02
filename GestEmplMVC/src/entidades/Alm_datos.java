@@ -1,26 +1,33 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package entidades;
 
 import java.util.ArrayList;
-import java.util.List;
 import org.xml.sax.InputSource;
 
 /**
  *
- * @author arube
+ * @author carlos
  */
-public class Alm_datos extends InputSource{
-     static int jajant;
+public class Alm_datos extends InputSource {
 
-    public Alm_datos(int porEjemplo) {
-        jajant = porEjemplo;
+    private ArrayList<Empleado> datos;
+
+    public Alm_datos(ArrayList<Empleado> datos) {
+        this.datos = new ArrayList();
+        this.datos = datos;
     }
 
+    public ArrayList<Empleado> getDatos() {
+        return datos;
+    }
 
-    public List<Empleado> getDatos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void mostrar() {
+        for (Empleado emp : datos) {
+            System.out.println(emp);
+        }
     }
 }
