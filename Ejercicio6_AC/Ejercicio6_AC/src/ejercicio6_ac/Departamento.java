@@ -44,6 +44,6 @@ public class Departamento {
 
     @Override
     public String toString() {
-        return "\t| " + nDepartamento + "\t| " + nombre + "\t| " + localizacion + '|';
+        return String.format("| %-5s| %-15s| %-15s|", nDepartamento, nombre, localizacion);
     }
 }

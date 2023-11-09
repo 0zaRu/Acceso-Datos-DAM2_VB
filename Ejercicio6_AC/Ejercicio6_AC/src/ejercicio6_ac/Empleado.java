@@ -95,6 +95,6 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return"| " + nEmpleado + "\t| " + apellido + "\t| " + oficio + "\t| " + dir + "\t| " + fecha_alta + "\t| " + salario + "\t| " + comision + "\t| " + nDepartamento + '|';
+        return String.format("| %-5s| %-15s| %-15s| %-5s| %-12s| %-10s| %-5s| %-5s|", nEmpleado, apellido, oficio, dir, fecha_alta, salario, comision, nDepartamento);
     }
 }

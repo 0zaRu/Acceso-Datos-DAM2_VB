@@ -5,6 +5,7 @@ import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,10 +18,10 @@ public class Ejercicio6_AC {
 
     final static File rutaBD = new File("baseDates6.db");
     static ObjectContainer bd;
+    
     static Scanner kb = new Scanner(System.in);
 
     public static void main(String[] args) {
-        kb.useDelimiter(System.getProperty("line.separator"));
 
         if (!rutaBD.exists())
             try {
@@ -30,24 +31,100 @@ public class Ejercicio6_AC {
         }
 
         bd = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), rutaBD.toString());
-
+        
+        borraRegistrosPrevios();
         instanciaDatosDB();
 
-        System.out.println("Tabla empleados:");
-        muestraTablaEmpleado();
-
-        System.out.println("Tabla empleados:");
-        muestraTablaDepartamento();
-
-        //QUEDA HACER LOS SELECT
-        System.out.println("Vamos a introducir un nuevo empleado: ");
-        introducirEmpleado(new Empleado());
-
-        System.out.println("Que registro de empleado quieres editar: ");
-        editaEmpleado();
-        muestraTablaEmpleado();
-
+        boolean salir = false;
+        int opcion;
+        
+        do{
+           opcion = menu();
+           kb.nextLine();
+           limpiarPantalla(25);
+           
+           switch(opcion){
+                case 1 -> {
+                    muestraTablaEmpleado();
+                }
+                   
+                case 2 -> {
+                    muestraTablaDepartamento();
+                }
+                   
+                case 3 -> {
+                    ArrayList<Empleado> result = selectEmpleadoVentas(new Empleado(0, null, null, 0, null, 0, 0, 30));
+                    System.out.println("APELLIDOS DE EMPLEADOS DE VENTAS: \n");
+                    for (int i = 0; i < result.size(); i++) {
+                        System.out.println("Empleado: "+result.get(i).getApellido());
+                    }
+                    //Apellido de todos los empleados contratados entre 1980 y 1990
+                    //Nombre de departamento y la suma de sus salarios
+                }
+                   
+                case 4 -> {
+                    System.out.println("Vamos a introducir un nuevo empleado: ");
+                    Empleado emp = new Empleado();
+                    introducirEmpleado(emp);
+                    System.out.println("Empleado introducido");
+                }
+                   
+                case 5 -> {
+                    System.out.println("Que registro de empleado quieres editar: ");
+                    editaEmpleado();
+                    System.out.println("Empleado modificado");
+                }
+                   
+                case 6 -> {
+                    System.out.println("Se va a salir del programa");
+                    salir = true;
+                }
+                   
+                default -> System.out.println("Valor introducido incorrecto");
+           }
+            System.out.println("\nPulse enter para continuar ...");
+            kb.nextLine();
+            
+            limpiarPantalla(25);
+          
+        }while(!salir);
+  
         bd.close();
+        kb.close();
+    }
+
+    public static int menu(){
+        System.out.println("Elige una opcion: ");
+        System.out.println("================================");
+        System.out.println("");
+        System.out.println("1. Mostrar la tabla empleado");
+        System.out.println("2. Mostrar la tabla departamento");
+        System.out.println("3. Ver selects filtrados");
+        System.out.println("4. Introducir un empleado");
+        System.out.println("5. Modificar un empleado");
+        System.out.println("6. Salir");
+        System.out.print("\n================================\nElige una opcion: ");
+        
+        return kb.nextInt();
+    }
+    
+    public static ArrayList<Empleado> selectEmpleadoVentas(Empleado example){
+        
+        ObjectSet<Empleado> result = bd.queryByExample(example);
+        ArrayList<Empleado> listado = new ArrayList<>();
+
+        if (result.size() == 0) {
+            System.out.println("No existen Registros de Empleados con este filtro..");
+
+        } else {
+            System.out.printf("Número de registros: %d %n",
+                    result.size());
+            while (result.hasNext()) {
+                Empleado p = result.next();
+                listado.add(p);
+            }
+        }
+        return listado;
     }
 
     public static void instanciaDatosDB() {
@@ -79,12 +156,17 @@ public class Ejercicio6_AC {
             System.out.println("No existen Registros de Empleados..");
 
         } else {
+            System.out.println("Tabla empleados:");
+                    
             System.out.printf("Número de registros: %d %n",
                     result.size());
+            
+            System.out.println("-----------------------------------------------------------------------------------------");
             while (result.hasNext()) {
                 Empleado p = result.next();
                 System.out.println(p);
             }
+            System.out.println("-----------------------------------------------------------------------------------------");
         }
     }
 
@@ -97,64 +179,104 @@ public class Ejercicio6_AC {
             System.out.println("No existen Registros de Departamentos..");
 
         } else {
+            System.out.println("Tabla departamentos:");
             System.out.printf("Número de registros: %d %n",
                     result.size());
+            
+            System.out.println("------------------------------------------");
             while (result.hasNext()) {
                 Departamento d = result.next();
                 System.out.println(d);
             }
+            System.out.println("------------------------------------------");
         }
     }
 
     public static void introducirEmpleado(Empleado emp) {
-
+        
         System.out.print("\nIntroduce el numero de empleado: ");
         int nEmp = kb.nextInt();
+        kb.nextLine();
         emp.setnEmpleado(nEmp);
 
-        System.out.print("\nIntroduce el apellido de empleado: ");
-        String apellido = kb.next();
+        System.out.print("Introduce el apellido de empleado: ");
+        String apellido = kb.nextLine();
         emp.setApellido(apellido);
 
-        System.out.print("\nIntroduce el oficio de empleado: ");
-        String oficio = kb.next();
+        System.out.print("Introduce el oficio de empleado: ");
+        String oficio = kb.nextLine();
         emp.setOficio(oficio);
 
-        System.out.print("\nIntroduce la direccion de empleado: ");
+        System.out.print("Introduce la direccion de empleado: ");
         int dir = kb.nextInt();
+        kb.nextLine();
         emp.setDir(dir);
 
-        System.out.print("\nIntroduce la fecha de alta de empleado: ");
-        String fecha_alta = kb.next();
+        System.out.print("Introduce la fecha de alta de empleado: ");
+        String fecha_alta = kb.nextLine();
         emp.setFecha_alta(fecha_alta);
 
-        System.out.print("\nIntroduce el salario de empleado: ");
+        System.out.print("Introduce el salario de empleado: ");
         double salario = kb.nextDouble();
+        kb.nextLine();
         emp.setSalario(salario);
 
-        System.out.print("\nIntroduce la comision de empleado: ");
+        System.out.print("Introduce la comision de empleado: ");
         float comision = kb.nextFloat();
+        kb.nextLine();
         emp.setComision(comision);
 
-        System.out.print("\nIntroduce el numero de departamento de empleado: ");
+        System.out.print("Introduce el numero de departamento de empleado: ");
         int dept = kb.nextInt();
+        kb.nextLine();
         emp.setnDepartamento(dept);
-
+        
         bd.store(emp);
     }
 
     public static void editaEmpleado() {
 
-        System.out.println("Introduce el numero de registro (considerando 0 el primero): ");
+        System.out.print("Introduce el numero de registro:");
         int reg = kb.nextInt();
 
         Empleado emp = new Empleado();
         ObjectSet<Empleado> result = bd.queryByExample(emp);
 
-        emp = result.get(reg);
+        emp = result.get(reg-1);
 
         introducirEmpleado(emp);
         bd.store(emp);
 
+    }
+
+    private static void borraRegistrosPrevios() {
+        Empleado emp = new Empleado();
+        ObjectSet<Empleado> result = bd.queryByExample(emp);
+
+        if (result.isEmpty()) {
+
+        } else {
+            while (result.hasNext()) {
+                    Empleado p = result.next();
+                    bd.delete(p);
+            }
+        }
+        
+        Departamento dep = new Departamento();
+        ObjectSet<Departamento> result2 = bd.queryByExample(dep);
+
+        if (result2.isEmpty()) {
+
+        } else {
+            while (result2.hasNext()) {
+                    Departamento d = result2.next();
+                    bd.delete(d);
+            }
+        }
+    }
+
+    public static void limpiarPantalla(int lineas){
+        for(int i=0; i<lineas; i++)
+            System.out.println();
     }
 }
