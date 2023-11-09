@@ -3,6 +3,7 @@ package ejercicio6_ac;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.query.Query;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,6 +59,10 @@ public class Ejercicio6_AC {
                     for (int i = 0; i < result.size(); i++) {
                         System.out.println("Empleado: "+result.get(i).getApellido());
                     }
+                    
+                    Query query = bd.query();
+                    
+                    
                     //Apellido de todos los empleados contratados entre 1980 y 1990
                     //Nombre de departamento y la suma de sus salarios
                 }
