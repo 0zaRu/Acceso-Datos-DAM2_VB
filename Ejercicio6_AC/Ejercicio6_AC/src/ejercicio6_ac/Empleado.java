@@ -8,7 +8,7 @@ public class Empleado {
     private int nEmpleado;
     private String apellido;
     private String oficio;
-    private String dir;
+    private int dir;
     private String fecha_alta;
     private double salario;
     private float comision;
@@ -18,7 +18,7 @@ public class Empleado {
     }
 
     
-    public Empleado(int nEmpleado, String apellido, String oficio, String dir, String fecha_alta, double salario, float comision, int nDepartamento) {
+    public Empleado(int nEmpleado, String apellido, String oficio, int dir, String fecha_alta, double salario, float comision, int nDepartamento) {
         this.nEmpleado = nEmpleado;
         this.apellido = apellido;
         this.oficio = oficio;
@@ -53,11 +53,11 @@ public class Empleado {
         this.oficio = oficio;
     }
 
-    public String getDir() {
+    public int getDir() {
         return dir;
     }
 
-    public void setDir(String dir) {
+    public void setDir(int dir) {
         this.dir = dir;
     }
 
@@ -97,9 +97,4 @@ public class Empleado {
     public String toString() {
         return"| " + nEmpleado + "\t| " + apellido + "\t| " + oficio + "\t| " + dir + "\t| " + fecha_alta + "\t| " + salario + "\t| " + comision + "\t| " + nDepartamento + '|';
     }
-
-    void setOfi(int nextInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

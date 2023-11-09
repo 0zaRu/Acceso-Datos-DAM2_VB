@@ -21,7 +21,7 @@ public class Ejercicio6_AC {
 
     public static void main(String[] args) {
         kb.useDelimiter(System.getProperty("line.separator"));
-        
+
         if (!rutaBD.exists())
             try {
             rutaBD.createNewFile();
@@ -31,31 +31,45 @@ public class Ejercicio6_AC {
 
         bd = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), rutaBD.toString());
 
-        //bd.store(new Empleado(10, "Rodríguez", "Informático", "C/Plasencia", "08/01/2024", 1500, 100, 10));
-        //bd.store(new Empleado(11, "Sánchez", "Instalador", "C/Nicaragua", "01/11/2023", 1800, 150, 20));
-
-        //bd.store(new Departamento(10, "Informática", "Salamanca"));
-        //bd.store(new Departamento(20, "Instalaciones", "Zamora"));
+        instanciaDatosDB();
 
         System.out.println("Tabla empleados:");
         muestraTablaEmpleado();
 
         System.out.println("Tabla empleados:");
         muestraTablaDepartamento();
-        
-        
+
         //QUEDA HACER LOS SELECT
-        
         System.out.println("Vamos a introducir un nuevo empleado: ");
         introducirEmpleado(new Empleado());
-        
+
         System.out.println("Que registro de empleado quieres editar: ");
         editaEmpleado();
         muestraTablaEmpleado();
-        
+
         bd.close();
     }
 
+    public static void instanciaDatosDB() {
+        bd.store(new Departamento(10, "CONTABILIDAD", "SEVILLA"));
+        bd.store(new Departamento(20, "INVESTIGACION", "MADRID"));
+        bd.store(new Departamento(30, "VENTAS", "BARCELONA"));
+        bd.store(new Departamento(40, "PRODUCCION", "BILBAO"));
+
+        bd.store(new Empleado(1, "López", "contable", 345, "1987-10-23", 23400.32, 5.34f, 10));
+        bd.store(new Empleado(2, "Alonso", "contable", 346, "1994-12-23", 20400.32, 3.34f, 10));
+        bd.store(new Empleado(3, "Santana", "contable", 345, "1980-09-23", 33670.20, 8.84f, 10));
+        bd.store(new Empleado(4, "Gil", "investigad", 245, "1987-01-23", 23400.32, 5.34f, 20));
+        bd.store(new Empleado(5, "Lorenzo", "investigad", 246, "1992-12-23", 20400.32, 3.34f, 20));
+        bd.store(new Empleado(6, "Manteca", "investigad", 245, "2000-10-23", 33670.20, 8.84f, 20));
+        bd.store(new Empleado(7, "Tocino", "vendedor", 445, "2003-05-23", 23400.32, 5.34f, 30));
+        bd.store(new Empleado(8, "Malo", "vendedor", 446, "1994-06-23", 20400.32, 3.34f, 30));
+        bd.store(new Empleado(9, "Salamanca", "vendedor", 445, "2004-08-23", 33670.20, 8.84f, 30));
+        bd.store(new Empleado(10, "Iglesias", "productor", 145, "1987-01-23", 33400.32, 15.34f, 40));
+        bd.store(new Empleado(11, "Martín", "productor", 146, "2004-12-23", 28400.32, 13.34f, 40));
+        bd.store(new Empleado(12, "Soroya", "productor", 145, "1980-10-23", 43670.20, 18.84f, 40));
+    }
+    
     public static void muestraTablaEmpleado() {
 
         Empleado emp = new Empleado();
@@ -73,7 +87,7 @@ public class Ejercicio6_AC {
             }
         }
     }
-    
+
     public static void muestraTablaDepartamento() {
 
         Departamento dep = new Departamento();
@@ -91,48 +105,56 @@ public class Ejercicio6_AC {
             }
         }
     }
-    
-    public static void introducirEmpleado(Empleado emp){
-        
+
+    public static void introducirEmpleado(Empleado emp) {
+
         System.out.print("\nIntroduce el numero de empleado: ");
-        emp.setnEmpleado(kb.nextInt());
-        
+        int nEmp = kb.nextInt();
+        emp.setnEmpleado(nEmp);
+
         System.out.print("\nIntroduce el apellido de empleado: ");
-        emp.setApellido(kb.next());
-        
+        String apellido = kb.next();
+        emp.setApellido(apellido);
+
         System.out.print("\nIntroduce el oficio de empleado: ");
-        emp.setOficio(kb.next());
-        
+        String oficio = kb.next();
+        emp.setOficio(oficio);
+
         System.out.print("\nIntroduce la direccion de empleado: ");
-        emp.setDir(kb.next());
-        
+        int dir = kb.nextInt();
+        emp.setDir(dir);
+
         System.out.print("\nIntroduce la fecha de alta de empleado: ");
-        emp.setFecha_alta(kb.next());
-        
+        String fecha_alta = kb.next();
+        emp.setFecha_alta(fecha_alta);
+
         System.out.print("\nIntroduce el salario de empleado: ");
-        emp.setSalario(kb.nextDouble());
-        
+        double salario = kb.nextDouble();
+        emp.setSalario(salario);
+
         System.out.print("\nIntroduce la comision de empleado: ");
-        emp.setComision(kb.nextFloat());
-        
+        float comision = kb.nextFloat();
+        emp.setComision(comision);
+
         System.out.print("\nIntroduce el numero de departamento de empleado: ");
-        emp.setnDepartamento(kb.nextInt());
-        
+        int dept = kb.nextInt();
+        emp.setnDepartamento(dept);
+
         bd.store(emp);
     }
-    
-    public static void editaEmpleado(){
-        
+
+    public static void editaEmpleado() {
+
         System.out.println("Introduce el numero de registro (considerando 0 el primero): ");
         int reg = kb.nextInt();
-        
+
         Empleado emp = new Empleado();
         ObjectSet<Empleado> result = bd.queryByExample(emp);
-        
+
         emp = result.get(reg);
-        
+
         introducirEmpleado(emp);
         bd.store(emp);
-        
+
     }
 }
