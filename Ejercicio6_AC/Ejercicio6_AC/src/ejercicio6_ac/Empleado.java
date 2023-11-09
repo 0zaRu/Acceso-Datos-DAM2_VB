@@ -1,5 +1,7 @@
 package ejercicio6_ac;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author 6002754
@@ -9,7 +11,7 @@ public class Empleado {
     private String apellido;
     private String oficio;
     private int dir;
-    private String fecha_alta;
+    private LocalDate fecha_alta;
     private double salario;
     private float comision;
     private int nDepartamento;
@@ -18,7 +20,7 @@ public class Empleado {
     }
 
     
-    public Empleado(int nEmpleado, String apellido, String oficio, int dir, String fecha_alta, double salario, float comision, int nDepartamento) {
+    public Empleado(int nEmpleado, String apellido, String oficio, int dir, LocalDate fecha_alta, double salario, float comision, int nDepartamento) {
         this.nEmpleado = nEmpleado;
         this.apellido = apellido;
         this.oficio = oficio;
@@ -61,11 +63,11 @@ public class Empleado {
         this.dir = dir;
     }
 
-    public String getFecha_alta() {
+    public LocalDate getFecha_alta() {
         return fecha_alta;
     }
 
-    public void setFecha_alta(String fecha_alta) {
+    public void setFecha_alta(LocalDate fecha_alta) {
         this.fecha_alta = fecha_alta;
     }
 
