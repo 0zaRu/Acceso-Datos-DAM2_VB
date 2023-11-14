@@ -287,7 +287,7 @@ public class Ejercicio6_AC {
         
         System.out.println("\n\nAPELLIDOS DE EMPLEADOS DADOS DE ALTA ENTRE 1980 Y 1990: \n");
         while (resultado.hasNext())
-            System.out.println("Empleado: "+((Empleado)resultado.next()).getApellido());
+            System.out.println("Emplzeado: "+((Empleado)resultado.next()).getApellido());
     }
 
     private static void muestraSumaPorDept() {
