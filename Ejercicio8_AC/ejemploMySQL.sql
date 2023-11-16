@@ -1,25 +1,11 @@
---
--- Base de datos: 'ejemplo'
---
--- --------------------------------------------------------
 CREATE DATABASE IF NOT EXISTS ejemplo;
 USE ejemplo;
-
---
--- Estructura de tabla para la tabla 'departamentos'
---
 
 CREATE TABLE IF NOT EXISTS 'departamentos' (
   'dept_no' tinyint(2) NOT NULL,
   'dnombre' varchar(15) CHARACTER SET utf8 NOT NULL,
   'loc' varchar(15) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla 'empleados'
---
 
 CREATE TABLE IF NOT EXISTS 'empleados' (
   'emp_no' smallint(4) unsigned NOT NULL,
@@ -32,25 +18,12 @@ CREATE TABLE IF NOT EXISTS 'empleados' (
   'dept_no' tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Indices de la tabla 'departamentos'
---
 ALTER TABLE 'departamentos'
  ADD PRIMARY KEY ('dept_no');
 
---
--- Indices de la tabla 'empleados'
---
 ALTER TABLE 'empleados'
  ADD PRIMARY KEY ('emp_no'), ADD KEY 'dept_no' ('dept_no');
 
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla 'empleados'
---
 ALTER TABLE 'empleados'
 ADD CONSTRAINT 'empleados_ibfk_1' FOREIGN KEY ('dept_no') REFERENCES 'departamentos' ('dept_no') ON UPDATE CASCADE;
 
@@ -74,3 +47,8 @@ INSERT INTO empleados VALUES (12, 'Soroya', 'productor', 145, '1980-10-23', 4367
 
 create user ejemplo@localhost identified	by	'ejemplo';
 grant all on ejemplo.* TO ejemplo@localhost;
+
+
+
+
+java -cp "C:\Users\6002754\OneDrive - Educacyl\Acceso a Datos\iBBDD\hsqldb\lib\hsqldb.jar" org.hsqldb.util.SqlTool

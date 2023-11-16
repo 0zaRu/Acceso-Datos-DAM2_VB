@@ -23,7 +23,6 @@ public class Ejercicio8_AC {
             opcionDB = menuDB();
             kb.nextLine();
             limpiarPantalla(25);
-
             switch(opcionDB){
                 case 1 -> {
                     con = new DBConector("jdbc:sqlite:./ejemplo.db");
@@ -71,40 +70,12 @@ public class Ejercicio8_AC {
                         case 3 -> {
                             con.getColumnsInfo();
                         }
-                         
+                        
                         case 4 -> {
-                            con.deleteTables();
-                        }
-                         
-                        case 5 -> {
                             con.createTables();
                         }
-                         
-                        case 6 -> {
-                            con.insertNewEmployee(kb);
-                        }
-                         
-                        case 7 -> {
-                            con.deleteEmployee(kb);
-                        }
-                        
-                        case 8 -> {
-                            con.insertNewDepartment(kb);
-                        }
-                         
-                        case 9 -> {
-                            con.deleteDepartment(kb);
-                        }
-                        
-                        case 10 -> {
-                            con.modifyEmployee(kb);
-                        }
-                        
-                        case 11 -> {
-                            con.modifyDepartment(kb);
-                        }
 
-                        case 12 -> {
+                        case 5 -> {
                             System.out.println("Se va a salir del programa");
                             salir = true;
                         }
@@ -129,6 +100,7 @@ public class Ejercicio8_AC {
             
         }catch(SQLException e){
             System.err.println("Error instanciando la conexion");
+            System.out.println(e.getMessage());
         }catch(Exception e){
             System.err.println("Hubo un error desconocido");
         }
@@ -143,15 +115,8 @@ public class Ejercicio8_AC {
         System.out.println("1. Mostrar informacion de la base de datos");
         System.out.println("2. Mostrar informacion de las tablas");
         System.out.println("3. Mostrar informacion de las columnas");
-        System.out.println("4. Borrar tablas de dept. y empleados");
-        System.out.println("5. Crear tabla de dept. y empleados");
-        System.out.println("6. Dar de alta a un empleado");
-        System.out.println("7. Dar de baja a un empleado");
-        System.out.println("8. Dar de alta un departamento");
-        System.out.println("9. Dar de baja un departamento");
-        System.out.println("10. Modificar a un empleado");
-        System.out.println("11. Modificar un departamento");
-        System.out.println("12. Salir");
+                System.out.println("4. Crear tablas");
+        System.out.println("5. Salir");
         System.out.print("\n================================\nElige una opcion: ");
         
         return kb.nextInt();

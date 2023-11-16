@@ -74,3 +74,4 @@ INSERT INTO empleados VALUES (12, 'Soroya', 'productor', 145, '1980-10-23', 4367
 
 create user ejemplo@localhost identified	by	'ejemplo';
 grant all on ejemplo.* TO ejemplo@localhost;
+
