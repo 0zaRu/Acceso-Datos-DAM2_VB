@@ -1,4 +1,4 @@
-package ejercicio9_ac;
+package ejercicio8_ac;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -13,8 +13,13 @@ public class DBConector {
     static Connection con;
     static Statement st;
 
-    public DBConector() throws SQLException{
-        con = DriverManager.getConnection("jdbc:mysql://localhost/ejemplo", "root", "123456");
+    public DBConector(String url, String user, String password) throws SQLException{
+        con = DriverManager.getConnection(url, user, password);
+        st = con.createStatement();
+    }
+    
+    public DBConector(String url) throws  SQLException{
+        con = DriverManager.getConnection(url);
         st = con.createStatement();
     }
     

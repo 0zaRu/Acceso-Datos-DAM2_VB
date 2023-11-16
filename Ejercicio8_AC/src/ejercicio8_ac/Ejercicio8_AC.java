@@ -1,4 +1,4 @@
-package ejercicio9_ac;
+package ejercicio8_ac;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -6,7 +6,7 @@ import java.util.Scanner;
  *
  * @author 6002754
  */
-public class Ejercicio9_AC {
+public class Ejercicio8_AC {
 
     static Scanner kb = new Scanner(System.in);
     static Statement st = null;
@@ -15,12 +15,44 @@ public class Ejercicio9_AC {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try{
-            DBConector con = new DBConector();
-
-            boolean salir = false;
-            int opcion;
+        DBConector con = null;
+        boolean salir = false;
+        int opcionDB;
         
+        try{
+            opcionDB = menuDB();
+            kb.nextLine();
+            limpiarPantalla(25);
+
+            switch(opcionDB){
+                case 1 -> {
+                    con = new DBConector("jdbc:sqlite:./ejemplo.db");
+                }
+                case 2 -> {
+                    con = new DBConector("jdbc:derby:./ejemplo");
+                }
+                case 3 -> {
+                    con = new DBConector("jdbc:hsqldb:file:./ejemplo");
+                }
+                case 4 -> {
+                    con = new DBConector("jdbc:h2:./ejemplo");
+                }
+                case 5 -> {
+                    con = new DBConector("jdbc:mysql://localhost/ejemplo", "root", "123456");
+                }
+                case 6 -> {
+                    System.out.println("Se va a salir del programa");
+                }
+                default -> {
+                    System.out.println("Valor introducido incorrecto, saldremos del programa");
+                }
+            }
+
+            if(con == null)
+                return;
+
+            limpiarPantalla(25);          
+            int opcion;
             do{
                 try{
                     opcion = menu();
@@ -120,6 +152,21 @@ public class Ejercicio9_AC {
         System.out.println("10. Modificar a un empleado");
         System.out.println("11. Modificar un departamento");
         System.out.println("12. Salir");
+        System.out.print("\n================================\nElige una opcion: ");
+        
+        return kb.nextInt();
+    }
+    
+    public static int menuDB(){
+        System.out.println("Elige una opcion de BBDD para utilizar: ");
+        System.out.println("================================");
+        System.out.println("");
+        System.out.println("1. SQLite");
+        System.out.println("2. Derby");
+        System.out.println("3. HSQLDB");
+        System.out.println("4. H2");
+        System.out.println("5. MySQL");
+        System.out.println("6. Salir");
         System.out.print("\n================================\nElige una opcion: ");
         
         return kb.nextInt();
