@@ -70,12 +70,8 @@ public class Ejercicio8_AC {
                         case 3 -> {
                             con.getColumnsInfo();
                         }
-                        
-                        case 4 -> {
-                            con.createTables();
-                        }
 
-                        case 5 -> {
+                        case 4 -> {
                             System.out.println("Se va a salir del programa");
                             salir = true;
                         }
@@ -115,8 +111,7 @@ public class Ejercicio8_AC {
         System.out.println("1. Mostrar informacion de la base de datos");
         System.out.println("2. Mostrar informacion de las tablas");
         System.out.println("3. Mostrar informacion de las columnas");
-                System.out.println("4. Crear tablas");
-        System.out.println("5. Salir");
+        System.out.println("4. Salir");
         System.out.print("\n================================\nElige una opcion: ");
         
         return kb.nextInt();

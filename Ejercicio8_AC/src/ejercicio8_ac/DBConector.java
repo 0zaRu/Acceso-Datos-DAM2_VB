@@ -32,34 +32,29 @@ public class DBConector {
     }
     
     public void getTableInfo() throws  SQLException{
-        ResultSet rs = st.executeQuery("SELECT "
-                                     + "TABLE_CATALOG as Catálogo, "
-                                     + "TABLE_SCHEMA as Esquema, "
-                                     + "TABLE_NAME as Tabla, "
-                                     + "TABLE_TYPE as Tipo "
-                                     + "FROM information_schema.tables "
-                                     + "WHERE TABLE_SCHEMA = 'ejemplo'");
+        DatabaseMetaData meta = con.getMetaData();
         
-        System.out.printf("%-15s%-15s%-15s%-15s%n", "Catalogo", "Equema", "Tabla", "Tipo");
-        System.out.println("============================================================");
-        while(rs.next())
-            System.out.printf("%-15s%-15s%-15s%-15s%n", rs.getObject(1), rs.getObject(2), rs.getObject(3), rs.getObject(4));
+        System.out.println("catalogo de la tabla: "+meta.getCatalogs());
+        System.out.println("Esquema de la base: "+meta.getSchemas());
+        System.out.println("Tipo de tabla: "+meta.getTableTypes());
     }
     
     public void getColumnsInfo() throws SQLException{
-        ResultSet rs = st.executeQuery("SELECT "
-                                     + "TABLE_NAME AS Tabla, "
-                                     + "COLUMN_NAME AS Columna, "
-                                     + "COLUMN_TYPE AS Tipo, "
-                                     + "IS_NULLABLE AS 'Admt. Nulos', "
-                                     + "CHARACTER_MAXIMUM_LENGTH AS Tamaño "
-                                     + "FROM information_schema.columns "
-                                     + "WHERE TABLE_SCHEMA = 'ejemplo'");
+        DatabaseMetaData meta = con.getMetaData();
         
+        ResultSet rs = meta.getColumns(null, "prueba", "ejemplo", null);
+
         System.out.printf("%-15s%-15s%-15s%-15s%-15s%n", "Tabla", "Columna", "Tipo", "Admt.Nulos", "Lenght");
         System.out.println("===========================================================================");
-        while(rs.next())
-            System.out.printf("%-15s%-15s%-15s%-15s%-15s%n", rs.getObject(1), rs.getObject(2), rs.getObject(3), rs.getObject(4), rs.getObject(5));
+
+        while (rs.next()) {
+            System.out.printf("%-15s%-15s%-15s%-15s%-15s%n",
+                    rs.getString("TABLE_NAME"),
+                    rs.getString("COLUMN_NAME"),
+                    rs.getString("TYPE_NAME"),
+                    rs.getString("IS_NULLABLE"),
+                    rs.getString("COLUMN_SIZE"));
+        }
     }
     
     public void deleteTables() throws SQLException{
