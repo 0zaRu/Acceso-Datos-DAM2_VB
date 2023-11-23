@@ -1,12 +1,7 @@
 <list>
-  <practica.completa.Cosmere>
+  <practica.Cosmere>
     <creador>Brandom Sanderson</creador>
-    <proximaSalida>3923-12-22 23:00:00.0 UTC</proximaSalida>
+    <proximaSalida>2023-12-23</proximaSalida>
     <hojasTotales>10000</hojasTotales>
-    <sagaAsociada>
-      <nLibros>4</nLibros>
-      <ideal>Vida antes que muerte</ideal>
-      <proximaSalida>3924-12-31 23:00:00.0 UTC</proximaSalida>
-    </sagaAsociada>
-  </practica.completa.Cosmere>
+  </practica.Cosmere>
 </list>

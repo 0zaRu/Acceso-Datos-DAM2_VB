@@ -2,15 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package practica.completa;
+package practica;
 
 import com.thoughtworks.xstream.XStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -22,7 +21,6 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -42,8 +40,8 @@ public class XMLs extends InputSource{
     static ArrayList<Cosmere> ejemplo = new ArrayList<>();
     
     public XMLs(){
-        ejemplo.add(new Cosmere("Brandom Sanderson", new Date(2023, 11, 23), 10000, 
-                    new SLA(4, "Vida antes que muerte", new Date(2024, 12, 1))));
+        ejemplo.add(new Cosmere("Brandom Sanderson", LocalDate.of(2023, 12, 23), 10000, 
+                    new SLA(4, "Vida antes que muerte", LocalDate.of(2023, 12, 23))));
     }
     
     public static void imprimeDOM(Cosmere c) throws  ParserConfigurationException, TransformerException{
@@ -152,26 +150,28 @@ public class XMLs extends InputSource{
     
     public static void serializazXStream() throws Exception{
         ejemplo.clear();
-        ejemplo.add(new Cosmere("Brandom Sanderson", new Date(2023, 11, 23), 10000, 
-                    new SLA(4, "Vida antes que muerte", new Date(2024, 12, 1))));
+        ejemplo.add(new Cosmere("Brandom Sanderson", LocalDate.of(2023, 12, 23), 10000, 
+                    null));
         
         XStream xstream = new XStream();
         
         File ruta = new File("CosmereXS.xml");
         if(!ruta.exists())ruta.createNewFile();
         
-        xstream.allowTypes(new String[]{"list", "practica.completa.Cosmere", "practica.completa.SLA"});
         xstream.toXML(ejemplo, new FileOutputStream(ruta));
     }
     
     public static void desSerializazXStream() throws Exception{
         XStream xstream = new XStream();
-
-        xstream.allowTypes(new String[]{"practica.completa.Cosmere"});
-        ArrayList<Cosmere> recibido = (ArrayList<Cosmere>) xstream.fromXML("CosmereXSX.xml");
+        
+        File ruta = new File("CosmereXS.xml");
+        
+        xstream.allowTypes(new String[]{"practica.Cosmere", "practica.SLA"});
+        
+        ArrayList<Cosmere> recibido = (ArrayList<Cosmere>) xstream.fromXML(ruta);
 
         for (int i = 0; i < recibido.size(); i++) {
-            System.out.println(recibido.get(i).toString()+"\n"+recibido.get(i).getSagaAsociada().toString());
+            System.out.println(recibido.get(i).toString());//+"\n"+recibido.get(i).getSagaAsociada().toString());
         }
     }
 }

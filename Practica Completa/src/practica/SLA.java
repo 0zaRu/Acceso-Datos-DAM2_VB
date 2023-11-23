@@ -1,6 +1,7 @@
-package practica.completa;
+package practica;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -10,9 +11,9 @@ import java.util.Date;
 public class SLA implements Serializable{
     private int nLibros;
     private String ideal;
-    private Date proximaSalida;
+    private LocalDate proximaSalida;
 
-    public SLA(int nLibros, String ideal, Date proximaSalida) {
+    public SLA(int nLibros, String ideal, LocalDate proximaSalida) {
         this.nLibros = nLibros;
         this.ideal = ideal;
         this.proximaSalida = proximaSalida;
@@ -34,11 +35,11 @@ public class SLA implements Serializable{
         this.ideal = ideal;
     }
 
-    public Date getProximaSalida() {
+    public LocalDate getProximaSalida() {
         return proximaSalida;
     }
 
-    public void setProximaSalida(Date proximaSalida) {
+    public void setProximaSalida(LocalDate proximaSalida) {
         this.proximaSalida = proximaSalida;
     }
 

@@ -1,4 +1,4 @@
-package practica.completa;
+package practica;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,8 +35,8 @@ public class PracticaCompleta {
                         InOutFIies.escribeFrase(frase);
                     }
                     case '3' -> {
-                        XMLs.imprimeDOM(new Cosmere("Brandom Sanderson", new Date(2023, 11, 23), 10000, 
-                        new SLA(4, "Vida antes que muerte", new Date(2024, 12, 1))));
+                        XMLs.imprimeDOM(new Cosmere("Brandom Sanderson", LocalDate.of(2023, 12, 23), 10000, 
+                        new SLA(4, "Vida antes que muerte", LocalDate.of(2023, 12, 23))));
                     }
                     
                     case '4' -> {
@@ -60,8 +60,8 @@ public class PracticaCompleta {
                     }
                     
                     case '9' -> {
-                        BBDD.insertaTabla(new Cosmere("Brandom Sanderson", new Date(2023, 11, 23), 10000, 
-                                          new SLA(4, "Vida antes que muerte", new Date(2024, 12, 1))));
+                        BBDD.insertaTabla(new Cosmere("Brandom Sanderson", LocalDate.of(2023, 12, 23), 10000, 
+                                          new SLA(4, "Vida antes que muerte", LocalDate.of(2023, 12, 23))));
                     }
                     
                     default -> {

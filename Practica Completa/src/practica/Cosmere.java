@@ -1,6 +1,7 @@
-package practica.completa;
+package practica;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -9,11 +10,11 @@ import java.util.Date;
  */
 public class Cosmere implements Serializable{
     private String creador;
-    private Date proximaSalida;
+    private LocalDate proximaSalida;
     private int hojasTotales;
     private SLA sagaAsociada;
 
-    public Cosmere(String creador, Date proximaSalida, int hojasTotales, SLA libro) {
+    public Cosmere(String creador, LocalDate proximaSalida, int hojasTotales, SLA libro) {
         this.creador = creador;
         this.proximaSalida = proximaSalida;
         this.hojasTotales = hojasTotales;
@@ -28,11 +29,11 @@ public class Cosmere implements Serializable{
         this.creador = creador;
     }
 
-    public Date getProximaSalida() {
+    public LocalDate getProximaSalida() {
         return proximaSalida;
     }
 
-    public void setProximaSalida(Date proximaSalida) {
+    public void setProximaSalida(LocalDate proximaSalida) {
         this.proximaSalida = proximaSalida;
     }
 

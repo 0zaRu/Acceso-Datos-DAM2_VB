@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<informatica>
+    <ciclo>
+        <nombre_corto>SMR</nombre_corto>
+        <nombre_largo>Sistemas Microinformáticos y Redes</nombre_largo>
+        <grado>Medio</grado>
+        <horas>2000</horas>
+        <modulos>
+            <modulo>
+                <nombre>Sistemas operativos monopuesto</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Aplicaciones ofimáticas</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Redes locales</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Aplicaciones web</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Formación y orientación laboral</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Montaje y mantenimiento de equipos</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Sistemas operativos en red</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Seguridad informática</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Servicios en red</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Empresa e iniciativa emprendedora</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Formación en centros de trabajo</nombre>
+                <curso>segundo</curso>
+            </modulo>
+        </modulos>
+    </ciclo>
+    <ciclo>
+        <nombre_corto>ASIR</nombre_corto>
+        <nombre_largo>Administración de sistemas informáticos en red</nombre_largo>
+        <grado>Superior</grado>
+        <horas>2000</horas>
+        <modulos>
+            <modulo>
+                <nombre>Implantación de sistemas operativos</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Planificación y administración de redes</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Fundamentos de hardware</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Gestión de bases de datos</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Lenguajes de marcas y sistemas de gestión de información</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Formación y orientación laboral</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Administración de sistemas operativos</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Servicios de rede e internet</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Implantación de aplicaciones web</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Administración de sistemas gestores de bases de datos</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Seguridad y alta disponibilidad</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Empresa e iniciativa emprendedora</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Proyecto de administración de sistemas informáticos en red</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Formación en centros de trabajo</nombre>
+                <curso>segundo</curso>
+            </modulo>
+        </modulos>
+    </ciclo>
+    <ciclo>
+        <nombre_corto>DAM</nombre_corto>
+        <nombre_largo>Desarrollo de aplicaciones multiplataforma</nombre_largo>
+        <grado>Superior</grado>
+        <horas>2000</horas>
+        <modulos>
+            <modulo>
+                <nombre>Sistemas informáticos</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Bases de datos</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Programación</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Lenguajes de marcas y sistemas de gestión de información</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Entornos de desarrollo</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Formación y orientación laboral</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Acceso a datos</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Desarrollo de interfaces</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Programación multimedia y dispositivos móviles</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Programación de servicios y procesos</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Sistemas de gestión empresarial</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Empresa e iniciativa emprendedora</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Proyecto de desarrollo de aplicaciones multiplataforma</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Formación en centros de trabajo</nombre>
+                <curso>segundo</curso>
+            </modulo>
+        </modulos>
+    </ciclo>
+    <ciclo>
+        <nombre_corto>DAW</nombre_corto>
+        <nombre_largo>Desarrollo de aplicaciones web</nombre_largo>
+        <grado>Superior</grado>
+        <horas>2000</horas>
+        <modulos>
+            <modulo>
+                <nombre>Sistemas informáticos</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Bases de datos</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Programación</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Lenguajes de marcas y sistemas de gestión de información</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Entornos de desarrollo</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Formación y orientación laboral</nombre>
+                <curso>primero</curso>
+            </modulo>
+            <modulo>
+                <nombre>Desarrollo web en entorno cliente</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Desarrollo web en entorno servidor</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Despliegue de aplicaciones web</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Diseño de interfaces web</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Proyecto de desarrollo aplicaciones web</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Empresa e iniciativa emprendedora</nombre>
+                <curso>segundo</curso>
+            </modulo>
+            <modulo>
+                <nombre>Formación en centros de trabajo</nombre>
+                <curso>segundo</curso>
+            </modulo>
+        </modulos>
+    </ciclo>
+</informatica>
