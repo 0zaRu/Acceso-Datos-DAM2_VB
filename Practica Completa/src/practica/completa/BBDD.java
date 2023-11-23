@@ -36,13 +36,15 @@ public class BBDD {
         
         Statement sentencia = conexion.createStatement();
         
-        String fecha = ""+c.getProximaSalida().getYear();
+        String fecha = ""+(c.getSagaAsociada().getProximaSalida().getYear()+1);
+        fecha += "-"+(c.getSagaAsociada().getProximaSalida().getMonth()+1);
+        fecha += "-"+(c.getSagaAsociada().getProximaSalida().getDay()+1);
         
         int i = sentencia.executeUpdate("INSERT INTO sla" +
                                         "(nLibros, ideal, proximaSalida)" +
                                         "VALUES ('"+c.getSagaAsociada().getnLibros()+
                                         "', '"+c.getSagaAsociada().getIdeal()+
-                                        "', '"+c.getSagaAsociada().getProximaSalida()+"')");
+                                        "', '"+fecha+"')");
         String sql = "Select SLA_key FROM sla where ideal = ?";
         PreparedStatement ps = conexion.prepareStatement(sql);
         ps.setString(1, c.getSagaAsociada().getIdeal());
@@ -54,10 +56,14 @@ public class BBDD {
             keyRecibida = rs.getInt(1);
         }
         
+        fecha = ""+(c.getProximaSalida().getYear()+1);
+        fecha += "-"+(c.getProximaSalida().getMonth()+1);
+        fecha += "-"+(c.getProximaSalida().getDay()+1);
+        
         i += sentencia.executeUpdate("INSERT INTO cosmere" +
                                      "(creador, proximaSalida, hojasTotales, SLA_key)" +
                                      "VALUES ('"+c.getCreador()+
-                                     "', '"+c.getProximaSalida()+
+                                     "', '"+fecha+
                                      "', '"+c.getHojasTotales()+
                                      "', '"+keyRecibida+"')");
     }
