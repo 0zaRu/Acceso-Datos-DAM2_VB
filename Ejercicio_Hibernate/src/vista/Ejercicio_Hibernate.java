@@ -1,8 +1,10 @@
 package vista;
 
 import controlador.DepartamentosMethods;
+import controlador.EmpleadosMethods;
+import hibernate.Departamentos;
+import hibernate.Empleados;
 import java.util.Scanner;
-import modelo.Departamentos;
 
 /**
  *
@@ -51,9 +53,9 @@ public class Ejercicio_Hibernate {
                     int nDepart = DepartamentosMethods.insertaNumDept();
                     
                     if(nDepart != -1 && DepartamentosMethods.modificaDepartamento(nDepart))
-                        System.out.println("Departamento dado de baja correctamente");
+                        System.out.println("Departamento modificado correctamente");
                     else
-                        System.out.println("Hubo un error haciendo la baja del departamento");
+                        System.out.println("Hubo un error haciendo la modificación del departamento");
                     
                     break;
                     
@@ -62,48 +64,107 @@ public class Ejercicio_Hibernate {
                     int nDeparta = DepartamentosMethods.insertaNumDept();
                     
                     if(nDeparta != -1 && DepartamentosMethods.consultaDepartamento(nDeparta))
-                        System.out.println("Departamento dado de baja correctamente");
+                        System.out.println("Departamento mostrado correctamente");
                     else
-                        System.out.println("Hubo un error haciendo la baja del departamento");
+                        System.out.println("Hubo un error mostrando el departamento");
                     
                     break;
                     
                 case 11:
                     // Alta Empleado
-                    //altaEmpleado();
+                    
+                    Empleados nuevoEmp = EmpleadosMethods.insertaEmpleado(null);
+                    
+                    if(nuevoEmp != null && EmpleadosMethods.altaEmpleado(nuevoEmp))
+                        System.out.println("Empleado introducido correctamente");
+                    else
+                        System.out.println("Hubo un error haciendo la insercción del Empleado");
+                    
                     break;
+                    
                 case 12:
                     // Baja Empleado
-                    //bajaEmpleado();
+                    
+                    int nEmp = EmpleadosMethods.insertaNumEmp();
+                    
+                    if(nEmp != -1 && EmpleadosMethods.bajaEmpleado(nEmp))
+                        System.out.println("Empleado dado de baja correctamente");
+                    else
+                        System.out.println("Hubo un error haciendo la baja del empleado");
+                    
                     break;
+                    
                 case 13:
                     // Modificación Empleado
-                    //modificarEmpleado();
+                    int nEmplea = EmpleadosMethods.insertaNumEmp();
+                    
+                    if(nEmplea != -1 && EmpleadosMethods.modificaEmpleado(nEmplea))
+                        System.out.println("Empleado modificado correctamente");
+                    else
+                        System.out.println("Hubo un error haciendo la modificación del empleado");
+                    
                     break;
+                    
                 case 14:
                     // Consulta Empleado
-                    //consultarEmpleado();
+                    int nEmpleado = EmpleadosMethods.insertaNumEmp();
+                    
+                    if(nEmpleado != -1 && EmpleadosMethods.consultaEmpleado(nEmpleado))
+                        System.out.println("Empleado mostrado correctamente");
+                    else
+                        System.out.println("Hubo un error mostrando el empleado");
+                    
                     break;
+                    
                 case 21:
                     // Empleados de un Departamento
-                    //empleadosDeDepartamento();
+                    int nDpt = DepartamentosMethods.insertaNumDept();
+                    
+                    if(nDpt != -1 && EmpleadosMethods.empleadosDeDepartamento(nDpt))
+                        System.out.println("Empleados mostrados correctamente");
+                    else
+                        System.out.println("Hubo un error mostrando los empleados");
+                    
                     break;
+                    
                 case 22:
                     // Listar Departamentos
-                    //listarDepartamentos();
+                    if(DepartamentosMethods.departamentos())
+                        System.out.println("Departamentos mostrados correctamente");
+                    else
+                        System.out.println("Hubo un error mostrando los departamentos");
+                    
                     break;
+                    
                 case 23:
                     // Listar Empleados
-                    //listarEmpleados();
+                    if(EmpleadosMethods.empleados())
+                        System.out.println("Empleados mostrados correctamente");
+                    else
+                        System.out.println("Hubo un error mostrando los empleados");
+                    
                     break;
+                    
                 case 31:
                     // Consultar Salarios Departamento
-                    //consultarSalariosDepartamento();
+                    int nDpto = DepartamentosMethods.insertaNumDept();
+                    
+                    if(nDpto != -1 && DepartamentosMethods.salarioDepartamento(nDpto))
+                        System.out.println("Salario de departamento mostrado correctamente");
+                    else
+                        System.out.println("Hubo un error mostrando el salarios del departamento");
+                    
                     break;
+                    
                 case 32:
                     // Consultar Salarios Empresa
-                    //consultarSalariosEmpresa();
+                    if(EmpleadosMethods.salarioEmpresa())
+                        System.out.println("Salarios de la empresa mostrados correctamente");
+                    else
+                        System.out.println("Hubo un error mostrando los salarios de la empresa");
+                    
                     break;
+                    
                 case 41:
                     // Cargar Departamentos
                     //cargarDepartamentos();

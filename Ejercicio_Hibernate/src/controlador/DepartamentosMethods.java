@@ -5,10 +5,12 @@
  */
 package controlador;
 
+import hibernate.Departamentos;
 import hibernate.SessionFactoryUtil;
+import java.util.Iterator;
 import java.util.Scanner;
-import modelo.Departamentos;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -19,16 +21,16 @@ import org.hibernate.Transaction;
  */
 public class DepartamentosMethods {
 
-    public static Departamentos insertaDepartamento(Departamentos nuevoDept){
+    public static Departamentos insertaDepartamento(Departamentos nuevoDept) {
         boolean nuevo = false;
-        if(nuevoDept == null){
+        if (nuevoDept == null) {
             nuevo = true;
             nuevoDept = new Departamentos();
         }
-        try{
+        try {
             Scanner scanner = new Scanner(System.in);
-            
-            if(nuevo){
+
+            if (nuevo) {
                 System.out.print("Introduce el numero de departamento: ");
                 nuevoDept.setDeptNo(scanner.nextByte());
                 scanner.nextLine();
@@ -37,34 +39,33 @@ public class DepartamentosMethods {
             System.out.print("Introduce el nombre del departamento: ");
             nuevoDept.setDnombre(scanner.nextLine());
 
-            System.out.println("Introduce el loc del departamento: ");
+            System.out.print("Introduce el loc del departamento: ");
             nuevoDept.setLoc(scanner.nextLine());
 
             return nuevoDept;
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             return null;
         }
     }
-    
-    
-    public static int insertaNumDept(){
-        try{
+
+    public static int insertaNumDept() {
+        try {
             Scanner scanner = new Scanner(System.in);
 
-            System.out.print("Introduce el numero de departamento que deseas dar de baja; ");
+            System.out.print("Introduce el numero de departamento con el que deseas trabajar: ");
             int nDept = scanner.nextInt();
             scanner.nextLine();
 
             return nDept;
-        
-        }catch (Exception e){
+
+        } catch (Exception e) {
             return -1;
         }
     }
-    
+
     public static boolean altaDepartamento(Departamentos dept) {
-        try{
+        try {
             SessionFactory sesion = SessionFactoryUtil.getSessionFactory();
             Session session = sesion.openSession();
 
@@ -75,64 +76,108 @@ public class DepartamentosMethods {
             session.close();
 
             return true;
-        }catch(HibernateException e){
+        } catch (HibernateException e) {
             return false;
         }
     }
-    
+
     public static boolean bajaDepartamento(int nDept) {
-        try{
+        try {
             SessionFactory sesion = SessionFactoryUtil.getSessionFactory();
             Session session = sesion.openSession();
 
             Transaction tx = session.beginTransaction();
-            session.delete(session.load(Departamentos.class, nDept));
+            session.delete(session.load(Departamentos.class, (byte) nDept));
 
             tx.commit();
             session.close();
 
             return true;
-        }catch(HibernateException e){
+        } catch (HibernateException e) {
             return false;
         }
     }
-    
+
     public static boolean modificaDepartamento(int nDept) {
-        try{
+        try {
             SessionFactory sesion = SessionFactoryUtil.getSessionFactory();
             Session session = sesion.openSession();
 
-            Departamentos recogido = (Departamentos) session.load(Departamentos.class, nDept);
+            Departamentos recogido = (Departamentos) session.load(Departamentos.class, (byte) nDept);
             recogido = insertaDepartamento(recogido);
-            
+
             Transaction tx = session.beginTransaction();
 
-            if(recogido != null) 
+            if (recogido != null) {
                 session.update(recogido);
-            else 
+            } else {
                 return false;
-            
+            }
+
             tx.commit();
             session.close();
 
             return true;
-        }catch(HibernateException e){
+        } catch (HibernateException e) {
             return false;
         }
     }
-    
+
     public static boolean consultaDepartamento(int nDept) {
-        try{
+        try {
             SessionFactory sesion = SessionFactoryUtil.getSessionFactory();
             Session session = sesion.openSession();
 
-            Departamentos recogido = (Departamentos) session.load(Departamentos.class, nDept);
+            Departamentos recogido = (Departamentos) session.load(Departamentos.class, (byte) nDept);
 
-            recogido.imprimeColumnado();
+            recogido.imprimeColumnado(true);
             session.close();
 
             return true;
-        }catch(HibernateException e){
+        } catch (HibernateException e) {
+            return false;
+        }
+    }
+
+    public static boolean departamentos() {
+        try {
+            SessionFactory sesion = SessionFactoryUtil.getSessionFactory();
+            Session session = sesion.openSession();
+
+            Query query = session.createQuery("FROM Departamentos");
+
+            Iterator<Departamentos> departamentos = query.iterate();
+
+            boolean primero = true;
+            while (departamentos.hasNext()) {
+                Departamentos deptLeido = (Departamentos) departamentos.next();
+                deptLeido.imprimeColumnado(primero);
+                primero = false;
+            }
+
+            return true;
+        } catch (HibernateException e) {
+            return false;
+        }
+    }
+
+    public static boolean salarioDepartamento(int nDept) {
+        try {
+            SessionFactory sesion = SessionFactoryUtil.getSessionFactory();
+            Session session = sesion.openSession();
+
+            Query query = session.createQuery("select avg(salario), max(salario), sum(salario) FROM Empleados e "
+                                            + "WHERE departamentos.deptNo = ?");
+
+            query.setByte(0, (byte)nDept);
+
+            Object[] resultado = (Object[]) query.uniqueResult();
+
+            System.out.printf("SALARIOS:\n==========\n%-15s %-15s %-15s\n", "Promedio", "Máximo", "Total");
+            System.out.printf("%-15.2f %-15.2f %-15.2f\n\n", resultado[0], resultado[1], resultado[2]);
+
+            return true;
+        } catch (HibernateException e) {
             return false;
         }
     }

@@ -11,9 +11,13 @@ public class SessionFactoryUtil {
     private static SessionFactory sessionFactory;
     private static ServiceRegistry serviceRegistry;
 
+    @SuppressWarnings("all")
     private static SessionFactory configureSessionFactory() throws HibernateException {
+        org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger("org.hibernate");
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(java.util.logging.Level.SEVERE); // or whatever level you need
+
         Configuration configuration = new Configuration();
-        configuration.configure();
+        configuration.configure("/hibernate/hibernate.cfg.xml");
         serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                 configuration.getProperties()).build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
