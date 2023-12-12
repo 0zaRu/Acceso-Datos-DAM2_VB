@@ -4,7 +4,6 @@ import hibernate.Departamentos;
 import hibernate.Empleados;
 import hibernate.SessionFactoryUtil;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
