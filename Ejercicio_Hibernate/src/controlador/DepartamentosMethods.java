@@ -167,9 +167,9 @@ public class DepartamentosMethods {
             Session session = sesion.openSession();
 
             Query query = session.createQuery("select avg(salario), max(salario), sum(salario) FROM Empleados e "
-                                            + "WHERE departamentos.deptNo = ?");
+                    + "WHERE departamentos.deptNo = ?");
 
-            query.setByte(0, (byte)nDept);
+            query.setByte(0, (byte) nDept);
 
             Object[] resultado = (Object[]) query.uniqueResult();
 
@@ -181,4 +181,41 @@ public class DepartamentosMethods {
             return false;
         }
     }
+
+    public static int cargaDepartamentosyEmpleados() {
+        try {
+            SessionFactory sesion = SessionFactoryUtil.getSessionFactory();
+            Session session = sesion.openSession();
+            Transaction tx = session.beginTransaction();
+
+            // Borro los datos previos
+            Query q = session.createQuery("delete from Empleados");
+            q.executeUpdate();
+
+            q = session.createQuery("delete from Departamentos");
+            q.executeUpdate();
+
+            // Inserto desde la tabla auxiliar para Departamentos
+            String hqlInsertDepartamentos = "insert into Departamentos(deptNo, dnombre, loc) "
+                    + "select n.deptNo, n.dnombre, n.loc from AuxDepartamentos n";
+
+            int filasInsDepartamentos = session.createQuery(hqlInsertDepartamentos).executeUpdate();
+
+            // Inserto desde la tabla auxiliar para Empleados
+            String hqlInsertEmpleados = "insert into Empleados(empNo, departamentos, apellido, oficio, dir, fechaAlta, salario, comision) "
+                    + "select n.empNo, n.auxDepartamentos, n.apellido, n.oficio, n.dir, n.fechaAlta, n.salario, n.comision from AuxEmpleados n";
+
+            int filasInsEmpleados = session.createQuery(hqlInsertEmpleados).executeUpdate();
+
+            tx.commit();
+            session.close();
+
+            // Devuelvo el número total de filas insertadas
+            return filasInsDepartamentos + filasInsEmpleados;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
 }

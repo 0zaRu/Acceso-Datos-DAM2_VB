@@ -166,13 +166,15 @@ public class Ejercicio_Hibernate {
                     break;
                     
                 case 41:
-                    // Cargar Departamentos
-                    //cargarDepartamentos();
+                    // Cargar Departamentos y empleados
+                    int n;
+                    if((n = DepartamentosMethods.cargaDepartamentosyEmpleados()) != -1)
+                        System.out.println("Departamentos y empleados establecidos desde la copia auxiliar. Se han puesto: "+n);
+                    else
+                        System.out.println("Hubo un error haciendo la copia auxiliar de los  y empleados");
+                    
                     break;
-                case 42:
-                    // Cargar Empleados
-                    //cargarEmpleados();
-                    break;
+
                 case 0:
                     System.out.println("Saliendo del programa. ¡Hasta luego!");
                     System.exit(0);
@@ -205,8 +207,7 @@ public class Ejercicio_Hibernate {
         System.out.println("23. Listar Empleados");
         System.out.println("31. Consultar Salarios Departamento");
         System.out.println("32. Consultar Salarios Empresa");
-        System.out.println("41. Cargar Departamentos");
-        System.out.println("42. Cargar Empleados");
+        System.out.println("41. Cargar Departamentos y Empleados");
         System.out.println("0. Salir");
         System.out.println("");
         System.out.print("Seleccione una opción: ");

@@ -41,6 +41,8 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="ejemplo"/>
-  <table-filter match-name="empleados"/>
   <table-filter match-name="departamentos"/>
+  <table-filter match-name="aux_empleados"/>
+  <table-filter match-name="aux_departamentos"/>
+  <table-filter match-name="empleados"/>
 </hibernate-reverse-engineering>

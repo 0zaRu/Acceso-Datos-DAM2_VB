@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 12 dic. 2023 21:03:18 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="hibernate.Departamentos" table="departamentos" catalog="ejemplo" optimistic-lock="version">
+    <class name="hibernate.AuxDepartamentos" table="aux_departamentos" catalog="ejemplo" optimistic-lock="version">
         <id name="deptNo" type="int">
             <column name="dept_no" />
             <generator class="assigned" />
@@ -14,11 +14,11 @@
         <property name="loc" type="string">
             <column name="loc" length="15" not-null="true" />
         </property>
-        <set name="empleadoses" table="empleados" inverse="true" lazy="true" fetch="select">
+        <set name="auxEmpleadoses" table="aux_empleados" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="dept_no" not-null="true" />
             </key>
-            <one-to-many class="hibernate.Empleados" />
+            <one-to-many class="hibernate.AuxEmpleados" />
         </set>
     </class>
 </hibernate-mapping>

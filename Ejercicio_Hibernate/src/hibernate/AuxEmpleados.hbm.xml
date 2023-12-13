@@ -3,12 +3,12 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 12 dic. 2023 21:03:18 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="hibernate.Empleados" table="empleados" catalog="ejemplo" optimistic-lock="version">
+    <class name="hibernate.AuxEmpleados" table="aux_empleados" catalog="ejemplo" optimistic-lock="version">
         <id name="empNo" type="short">
             <column name="emp_no" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="departamentos" class="hibernate.Departamentos" fetch="select">
+        <many-to-one name="auxDepartamentos" class="hibernate.AuxDepartamentos" fetch="select">
             <column name="dept_no" not-null="true" />
         </many-to-one>
         <property name="apellido" type="string">
