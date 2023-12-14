@@ -203,7 +203,8 @@ public class DepartamentosMethods {
 
             // Inserto desde la tabla auxiliar para Empleados
             String hqlInsertEmpleados = "insert into Empleados(empNo, departamentos, apellido, oficio, dir, fechaAlta, salario, comision) "
-                    + "select n.empNo, n.auxDepartamentos, n.apellido, n.oficio, n.dir, n.fechaAlta, n.salario, n.comision from AuxEmpleados n";
+                    + "select n.empNo, d, n.apellido, n.oficio, n.dir, n.fechaAlta, n.salario, n.comision from AuxEmpleados n, Departamentos d "
+                    + "where n.auxDepartamentos.deptNo = d.deptNo";
 
             int filasInsEmpleados = session.createQuery(hqlInsertEmpleados).executeUpdate();
 
