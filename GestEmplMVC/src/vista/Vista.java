@@ -62,7 +62,7 @@ public class Vista {
         else
             System.err.println("Hubo un problema a la hora de la escritura");
     }
-    
+    /*
     public void serializaXStream(){
         if(c.serializaXStream()){
             System.out.println("Serializado correctamente");
@@ -78,7 +78,7 @@ public class Vista {
             System.out.println("Problemas deserializado");
         }
     }
-
+    */
     public void visualizaXSL() {
         c.visualizaXSL();
     }

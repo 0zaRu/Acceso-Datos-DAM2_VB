@@ -37,7 +37,7 @@ public class Controlador {
     public boolean escribeSax(){
         return m.escribeSax();
     }
-    
+    /*
     public boolean serializaXStream(){
         return m.serializaXStream();
     }
@@ -45,7 +45,7 @@ public class Controlador {
     public boolean deserializaXStream(){
         return m.deserializaXStream();
     }
-
+    */
     public boolean visualizaXSL() {
         return m.visualizaXSL();
     }

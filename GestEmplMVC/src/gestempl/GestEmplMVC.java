@@ -62,7 +62,7 @@ public class GestEmplMVC {
                 case "6": //LEE SAX
                     v.leeSax();
                     break;
-                   
+                   /*
                 case "7":
                     v.serializaXStream();
                     break;
@@ -70,7 +70,7 @@ public class GestEmplMVC {
                 case "8":
                     v.deserializaXStream();
                     break;
-                    
+                    */
                 case "9":
                     v.visualizaXSL();
                     break;

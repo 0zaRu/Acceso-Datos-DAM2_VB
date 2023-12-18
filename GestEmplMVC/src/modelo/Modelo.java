@@ -1,6 +1,6 @@
 package modelo;
 
-import com.thoughtworks.xstream.XStream;
+//import com.thoughtworks.xstream.XStream;
 import entidades.Alm_datos;
 import entidades.Empleado;
 import java.io.File;
@@ -88,7 +88,7 @@ public class Modelo implements Serializable {
             
             DOMImplementation implementation = builder.getDOMImplementation();
             Document document = implementation.createDocument(null, "Empleados", null);
-         
+            
             for(int i = 0; i<empleados.size(); i++){
                 Element raiz = document.createElement("empleado");
                 document.getDocumentElement().appendChild(raiz);
@@ -225,7 +225,7 @@ public class Modelo implements Serializable {
             return false;
         }
     }
-    
+    /*
     public boolean serializaXStream(){
         
         XStream xstream= new XStream();
@@ -254,7 +254,7 @@ public class Modelo implements Serializable {
         }
         return true;
     }
-    
+    */
     public boolean visualizaXSL() {
         
         File pagHTML = new File(fichXS.getParent(), "EmpleadosXS.html");
