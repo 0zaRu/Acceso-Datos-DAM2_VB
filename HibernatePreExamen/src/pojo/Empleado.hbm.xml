@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25 feb. 2024 18:48:57 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.Empleado" table="EMPLEADO" schema="SYSTEM">
+        <id name="empNo" type="big_decimal">
+            <column name="EMP_NO" precision="22" scale="0" />
+            <generator class="assigned"></generator>
+        </id>
+        <many-to-one name="departamento" class="pojo.Departamento" fetch="select">
+            <column name="DEPT_NOMBRE" length="20" />
+        </many-to-one>
+        <property name="apellido" type="string">
+            <column name="APELLIDO" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>

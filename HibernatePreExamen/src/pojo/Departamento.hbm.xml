@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25 feb. 2024 18:48:57 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.Departamento" table="DEPARTAMENTO" schema="SYSTEM">
+        <id name="nombre" type="string">
+            <column name="NOMBRE" length="20" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="localidad" type="string">
+            <column name="LOCALIDAD" length="20" />
+        </property>
+        <set name="empleados" table="EMPLEADO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="DEPT_NOMBRE" length="20" />
+            </key>
+            <one-to-many class="pojo.Empleado" />
+        </set>
+    </class>
+</hibernate-mapping>
