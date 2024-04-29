@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 feb. 2024 15:32:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Pedidos" table="pedidos" catalog="jardineria" optimistic-lock="version">
+        <id name="codigoPedido" type="int">
+            <column name="CodigoPedido" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="clientes" class="modelo.Clientes" fetch="select">
+            <column name="CodigoCliente" not-null="true" />
+        </many-to-one>
+        <property name="fechaPedido" type="date">
+            <column name="FechaPedido" length="10" not-null="true" />
+        </property>
+        <property name="fechaEsperada" type="date">
+            <column name="FechaEsperada" length="10" not-null="true" />
+        </property>
+        <property name="fechaEntrega" type="date">
+            <column name="FechaEntrega" length="10" />
+        </property>
+        <property name="estado" type="string">
+            <column name="Estado" length="15" not-null="true" />
+        </property>
+        <property name="comentarios" type="string">
+            <column name="Comentarios" length="65535" />
+        </property>
+        <set name="detallepedidoses" table="detallepedidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CodigoPedido" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Detallepedidos" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 feb. 2024 15:32:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Productos" table="productos" catalog="jardineria" optimistic-lock="version">
+        <id name="codigoProducto" type="string">
+            <column name="CodigoProducto" length="15" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="gamasproductos" class="modelo.Gamasproductos" fetch="select">
+            <column name="Gama" length="50" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="70" not-null="true" />
+        </property>
+        <property name="dimensiones" type="string">
+            <column name="Dimensiones" length="25" />
+        </property>
+        <property name="proveedor" type="string">
+            <column name="Proveedor" length="50" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="Descripcion" length="65535" />
+        </property>
+        <property name="cantidadEnStock" type="short">
+            <column name="CantidadEnStock" not-null="true" />
+        </property>
+        <property name="precioVenta" type="big_decimal">
+            <column name="PrecioVenta" precision="15" not-null="true" />
+        </property>
+        <property name="precioProveedor" type="big_decimal">
+            <column name="PrecioProveedor" precision="15" />
+        </property>
+        <set name="detallepedidoses" table="detallepedidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CodigoProducto" length="15" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Detallepedidos" />
+        </set>
+    </class>
+</hibernate-mapping>

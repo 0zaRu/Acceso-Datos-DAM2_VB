@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 feb. 2024 15:32:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Oficinas" table="oficinas" catalog="jardineria" optimistic-lock="version">
+        <id name="codigoOficina" type="string">
+            <column name="CodigoOficina" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="ciudad" type="string">
+            <column name="Ciudad" length="30" not-null="true" />
+        </property>
+        <property name="pais" type="string">
+            <column name="Pais" length="50" not-null="true" />
+        </property>
+        <property name="region" type="string">
+            <column name="Region" length="50" />
+        </property>
+        <property name="codigoPostal" type="string">
+            <column name="CodigoPostal" length="10" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="Telefono" length="20" not-null="true" />
+        </property>
+        <property name="lineaDireccion1" type="string">
+            <column name="LineaDireccion1" length="50" not-null="true" />
+        </property>
+        <property name="lineaDireccion2" type="string">
+            <column name="LineaDireccion2" length="50" />
+        </property>
+        <set name="empleadoses" table="empleados" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CodigoOficina" length="10" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Empleados" />
+        </set>
+    </class>
+</hibernate-mapping>

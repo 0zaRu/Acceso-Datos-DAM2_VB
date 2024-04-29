@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 feb. 2024 15:32:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Gamasproductos" table="gamasproductos" catalog="jardineria" optimistic-lock="version">
+        <id name="gama" type="string">
+            <column name="Gama" length="50" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcionTexto" type="string">
+            <column name="DescripcionTexto" length="65535" />
+        </property>
+        <property name="descripcionHtml" type="string">
+            <column name="DescripcionHTML" length="65535" />
+        </property>
+        <property name="imagen" type="binary">
+            <column name="Imagen" />
+        </property>
+        <set name="productoses" table="productos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Gama" length="50" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Productos" />
+        </set>
+    </class>
+</hibernate-mapping>

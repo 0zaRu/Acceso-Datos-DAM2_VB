@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 feb. 2024 15:32:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Pagos" table="pagos" catalog="jardineria" optimistic-lock="version">
+        <composite-id name="id" class="modelo.PagosId">
+            <key-property name="codigoCliente" type="int">
+                <column name="CodigoCliente" />
+            </key-property>
+            <key-property name="idtransaccion" type="string">
+                <column name="IDTransaccion" length="50" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="clientes" class="modelo.Clientes" update="false" insert="false" fetch="select">
+            <column name="CodigoCliente" not-null="true" />
+        </many-to-one>
+        <property name="formaPago" type="string">
+            <column name="FormaPago" length="40" not-null="true" />
+        </property>
+        <property name="fechaPago" type="date">
+            <column name="FechaPago" length="10" not-null="true" />
+        </property>
+        <property name="cantidad" type="big_decimal">
+            <column name="Cantidad" precision="15" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 feb. 2024 15:32:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Detallepedidos" table="detallepedidos" catalog="jardineria" optimistic-lock="version">
+        <composite-id name="id" class="modelo.DetallepedidosId">
+            <key-property name="codigoPedido" type="int">
+                <column name="CodigoPedido" />
+            </key-property>
+            <key-property name="codigoProducto" type="string">
+                <column name="CodigoProducto" length="15" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pedidos" class="modelo.Pedidos" update="false" insert="false" fetch="select">
+            <column name="CodigoPedido" not-null="true" />
+        </many-to-one>
+        <many-to-one name="productos" class="modelo.Productos" update="false" insert="false" fetch="select">
+            <column name="CodigoProducto" length="15" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="Cantidad" not-null="true" />
+        </property>
+        <property name="precioUnidad" type="big_decimal">
+            <column name="PrecioUnidad" precision="15" not-null="true" />
+        </property>
+        <property name="numeroLinea" type="short">
+            <column name="NumeroLinea" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
